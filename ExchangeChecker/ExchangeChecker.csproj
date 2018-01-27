@@ -12,4 +12,13 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Exchange.Bitstamp\Exchange.Bitstamp.csproj" />
+    <ProjectReference Include="..\Exchange.Cex\Exchange.Cex.csproj" />
+    <ProjectReference Include="..\Exchange.Coinbase\Exchange.Coinbase.csproj" />
+    <ProjectReference Include="..\Exchange.Exmo\Exchange.Exmo.csproj" />
+    <ProjectReference Include="..\Exchange.Gdax\Exchange.Gdax.csproj" />
+    <ProjectReference Include="..\Exchange.Kraken\Exchange.Kraken.csproj" />
+  </ItemGroup>
+
 </Project>
