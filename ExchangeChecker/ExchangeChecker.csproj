@@ -2,9 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/01b70249-ecc2-4fd5-9706-84db10e8973b/resourcegroups/ExchangeChecker/providers/microsoft.insights/components/ExchangeChecker</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/01b70249-ecc2-4fd5-9706-84db10e8973b/resourcegroups/ExchangeChecker/providers/microsoft.insights/components/ExchangeChecker</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
   </ItemGroup>
 
@@ -19,7 +22,12 @@
     <ProjectReference Include="..\Exchange.Coinbase\Exchange.Coinbase.csproj" />
     <ProjectReference Include="..\Exchange.Exmo\Exchange.Exmo.csproj" />
     <ProjectReference Include="..\Exchange.Gdax\Exchange.Gdax.csproj" />
+    <ProjectReference Include="..\Exchange.Huobi\Exchange.Huobi.csproj" />
     <ProjectReference Include="..\Exchange.Kraken\Exchange.Kraken.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>

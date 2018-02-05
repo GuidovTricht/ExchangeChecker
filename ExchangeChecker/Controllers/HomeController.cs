@@ -11,6 +11,7 @@ using Exchange.Cex;
 using Exchange.Coinbase;
 using Exchange.Bitstamp;
 using Exchange.Bibox;
+using Exchange.Huobi;
 
 namespace ExchangeChecker.Controllers
 {
@@ -23,6 +24,7 @@ namespace ExchangeChecker.Controllers
         private readonly ICoinbaseService coinbaseService;
         private readonly IBitstampService bitstampService;
         private readonly IBiboxService biboxService;
+        private readonly IHuobiService huobiService;
 
         public HomeController()
         {
@@ -33,6 +35,7 @@ namespace ExchangeChecker.Controllers
             coinbaseService = new CoinbaseService();
             bitstampService = new BitstampService();
             biboxService = new BiboxService();
+            huobiService = new HuobiService();
         }
 
         public IActionResult Index(string currency = "EUR")
@@ -91,6 +94,13 @@ namespace ExchangeChecker.Controllers
                         BitcoinPrice = biboxService.GetMarket("BTC_" + currency)?.Result?.Last,
                         EthereumPrice = biboxService.GetMarket("ETH_" + currency)?.Result?.Last,
                         LitecoinPrice = biboxService.GetMarket("LTC_" + currency)?.Result?.Last
+                    },
+                    new ExchangeDetails()
+                    {
+                        Name = "Huobi",
+                        BitcoinPrice = huobiService.GetMarket("BTC" + currency)?.Tick?.Close.ToString(),
+                        EthereumPrice = huobiService.GetMarket("ETH" + currency)?.Tick?.Close.ToString(),
+                        LitecoinPrice = huobiService.GetMarket("LTC" + currency)?.Tick?.Close.ToString()
                     }
                 }
             };
