@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Exchange.Bibox\Exchange.Bibox.csproj" />
     <ProjectReference Include="..\Exchange.Bitstamp\Exchange.Bitstamp.csproj" />
     <ProjectReference Include="..\Exchange.Cex\Exchange.Cex.csproj" />
     <ProjectReference Include="..\Exchange.Coinbase\Exchange.Coinbase.csproj" />

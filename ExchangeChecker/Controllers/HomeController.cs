@@ -10,6 +10,7 @@ using Exchange.Exmo;
 using Exchange.Cex;
 using Exchange.Coinbase;
 using Exchange.Bitstamp;
+using Exchange.Bibox;
 
 namespace ExchangeChecker.Controllers
 {
@@ -21,6 +22,7 @@ namespace ExchangeChecker.Controllers
         private readonly ICexService cexService;
         private readonly ICoinbaseService coinbaseService;
         private readonly IBitstampService bitstampService;
+        private readonly IBiboxService biboxService;
 
         public HomeController()
         {
@@ -30,6 +32,7 @@ namespace ExchangeChecker.Controllers
             cexService = new CexService();
             coinbaseService = new CoinbaseService();
             bitstampService = new BitstampService();
+            biboxService = new BiboxService();
         }
 
         public IActionResult Index(string currency = "EUR")
@@ -81,6 +84,13 @@ namespace ExchangeChecker.Controllers
                         BitcoinPrice = bitstampService.GetTicker("BTC" + currency)?.Last,
                         EthereumPrice = bitstampService.GetTicker("ETH" + currency)?.Last,
                         LitecoinPrice = bitstampService.GetTicker("LTC" + currency)?.Last
+                    },
+                    new ExchangeDetails()
+                    {
+                        Name = "Bibox",
+                        BitcoinPrice = biboxService.GetMarket("BTC_" + currency)?.Result?.Last,
+                        EthereumPrice = biboxService.GetMarket("ETH_" + currency)?.Result?.Last,
+                        LitecoinPrice = biboxService.GetMarket("LTC_" + currency)?.Result?.Last
                     }
                 }
             };
