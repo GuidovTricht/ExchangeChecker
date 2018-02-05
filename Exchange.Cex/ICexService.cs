@@ -1,10 +1,11 @@
 ﻿using Exchange.Cex.Models;
+using System.Threading.Tasks;
 
 namespace Exchange.Cex
 {
     public interface ICexService
     {
-        Ticker GetTicker(string firstCurrency, string secondCurrency);
-        Tickers GetTickers(string firstCurrency = "BTC", string secondCurrency = "EUR");
+        Task<Ticker> GetTicker(string firstCurrency, string secondCurrency);
+        Task<Tickers> GetTickers(string firstCurrency = "BTC", string secondCurrency = "EUR");
     }
 }

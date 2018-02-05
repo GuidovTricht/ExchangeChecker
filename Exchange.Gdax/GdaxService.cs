@@ -2,6 +2,7 @@
 using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Exchange.Gdax
 {
@@ -14,11 +15,11 @@ namespace Exchange.Gdax
             _restClient = new RestClient("https://api.gdax.com/"); //https://api.gdax.com/products/ETH-EUR/ticker
         }
 
-        public List<Product> GetProducts(string quoteCurrency = "")
+        public async Task<List<Product>> GetProducts(string quoteCurrency = "")
         {
             var request = new RestRequest(Constants.RequestUriProducts, Method.GET);
 
-            var response = _restClient.Execute<List<Product>>(request);
+            var response = await _restClient.ExecuteTaskAsync<List<Product>>(request);
             if (response != null && response.IsSuccessful)
             {
                 if (!string.IsNullOrEmpty(quoteCurrency))
@@ -29,12 +30,12 @@ namespace Exchange.Gdax
             return null;
         }
 
-        public Product GetProductById(string id)
+        public async Task<Product> GetProductById(string id)
         {
             var request = new RestRequest(Constants.RequestUriProduct, Method.GET);
             request.AddUrlSegment("id", id);
 
-            var response = _restClient.Execute<Product>(request);
+            var response = await _restClient.ExecuteTaskAsync<Product>(request);
             if (response != null && response.IsSuccessful)
             {
                 return response.Data;
@@ -43,12 +44,12 @@ namespace Exchange.Gdax
             return null;
         }
 
-        public Ticker GetTicker(string id)
+        public async Task<Ticker> GetTicker(string id)
         {
             var request = new RestRequest(Constants.RequestUriTicker, Method.GET);
             request.AddUrlSegment("id", id);
 
-            var response = _restClient.Execute<Ticker>(request);
+            var response = await _restClient.ExecuteTaskAsync<Ticker>(request);
             if(response != null && response.IsSuccessful)
             {
                 return response.Data;

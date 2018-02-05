@@ -1,5 +1,6 @@
 ﻿using Exchange.Huobi.Models;
 using RestSharp;
+using System.Threading.Tasks;
 
 namespace Exchange.Huobi
 {
@@ -12,7 +13,7 @@ namespace Exchange.Huobi
             _restClient = new RestClient("https://api.huobi.pro/"); //https://api.huobi.pro/market/detail/merged?symbol=ethbtc
         }
 
-        public MarketResponse GetMarket(string id)
+        public async Task<MarketResponse> GetMarket(string id)
         {
             id = id.ToLower();
 
@@ -20,7 +21,7 @@ namespace Exchange.Huobi
             request.AddUrlSegment("id", id);
             request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
 
-            var response = _restClient.Execute<MarketResponse>(request);
+            var response = await _restClient.ExecuteTaskAsync<MarketResponse>(request);
             if (response != null && response.IsSuccessful)
             {
                 return response.Data;

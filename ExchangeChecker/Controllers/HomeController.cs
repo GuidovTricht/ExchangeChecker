@@ -40,7 +40,7 @@ namespace ExchangeChecker.Controllers
 
         public IActionResult Index(string currency = "EUR")
         {
-            var exmoTickers = exmoService.GetTickers();
+            var exmoTickers = exmoService.GetTickers().GetAwaiter().GetResult();
 
             var viewModel = new ExchangeOverviewViewModel()
             {
@@ -49,16 +49,16 @@ namespace ExchangeChecker.Controllers
                     new ExchangeDetails()
                     {
                         Name = "GDAX",
-                        BitcoinPrice = gdaxService.GetTicker("BTC-" + currency)?.Price,
-                        EthereumPrice = gdaxService.GetTicker("ETH-" + currency)?.Price,
-                        LitecoinPrice = gdaxService.GetTicker("LTC-" + currency)?.Price
+                        BitcoinPrice = gdaxService.GetTicker("BTC-" + currency).GetAwaiter().GetResult()?.Price,
+                        EthereumPrice = gdaxService.GetTicker("ETH-" + currency).GetAwaiter().GetResult()?.Price,
+                        LitecoinPrice = gdaxService.GetTicker("LTC-" + currency).GetAwaiter().GetResult()?.Price
                     },
                     new ExchangeDetails()
                     {
                         Name = "Kraken",
-                        BitcoinPrice = krakenService.GetTicker("BTC" + currency)?.C?.FirstOrDefault(),
-                        EthereumPrice = krakenService.GetTicker("ETH" + currency)?.C?.FirstOrDefault(),
-                        LitecoinPrice = krakenService.GetTicker("LTC" + currency)?.C?.FirstOrDefault()
+                        BitcoinPrice = krakenService.GetTicker("BTC" + currency).GetAwaiter().GetResult()?.C?.FirstOrDefault(),
+                        EthereumPrice = krakenService.GetTicker("ETH" + currency).GetAwaiter().GetResult()?.C?.FirstOrDefault(),
+                        LitecoinPrice = krakenService.GetTicker("LTC" + currency).GetAwaiter().GetResult()?.C?.FirstOrDefault()
                     },
                     new ExchangeDetails()
                     {
@@ -70,37 +70,37 @@ namespace ExchangeChecker.Controllers
                     new ExchangeDetails()
                     {
                         Name = "Cex",
-                        BitcoinPrice = cexService.GetTicker("BTC", currency)?.Last,
-                        EthereumPrice = cexService.GetTicker("ETH", currency)?.Last,
-                        LitecoinPrice = cexService.GetTicker("LTC", currency)?.Last
+                        BitcoinPrice = cexService.GetTicker("BTC", currency).GetAwaiter().GetResult()?.Last,
+                        EthereumPrice = cexService.GetTicker("ETH", currency).GetAwaiter().GetResult()?.Last,
+                        LitecoinPrice = cexService.GetTicker("LTC", currency).GetAwaiter().GetResult()?.Last
                     },
                     new ExchangeDetails()
                     {
                         Name = "Coinbase",
-                        BitcoinPrice = coinbaseService.GetTickers("BTC")?.Data?.Rates?.FirstOrDefault(r => r.Key == currency).Value,
-                        EthereumPrice = coinbaseService.GetTickers("ETH")?.Data?.Rates?.FirstOrDefault(r => r.Key == currency).Value,
-                        LitecoinPrice = coinbaseService.GetTickers("LTC")?.Data?.Rates?.FirstOrDefault(r => r.Key == currency).Value
+                        BitcoinPrice = coinbaseService.GetTickers("BTC").GetAwaiter().GetResult()?.Data?.Rates?.FirstOrDefault(r => r.Key == currency).Value,
+                        EthereumPrice = coinbaseService.GetTickers("ETH").GetAwaiter().GetResult()?.Data?.Rates?.FirstOrDefault(r => r.Key == currency).Value,
+                        LitecoinPrice = coinbaseService.GetTickers("LTC").GetAwaiter().GetResult()?.Data?.Rates?.FirstOrDefault(r => r.Key == currency).Value
                     },
                     new ExchangeDetails()
                     {
                         Name = "Bitstamp",
-                        BitcoinPrice = bitstampService.GetTicker("BTC" + currency)?.Last,
-                        EthereumPrice = bitstampService.GetTicker("ETH" + currency)?.Last,
-                        LitecoinPrice = bitstampService.GetTicker("LTC" + currency)?.Last
+                        BitcoinPrice = bitstampService.GetTicker("BTC" + currency).GetAwaiter().GetResult()?.Last,
+                        EthereumPrice = bitstampService.GetTicker("ETH" + currency).GetAwaiter().GetResult()?.Last,
+                        LitecoinPrice = bitstampService.GetTicker("LTC" + currency).GetAwaiter().GetResult()?.Last
                     },
                     new ExchangeDetails()
                     {
                         Name = "Bibox",
-                        BitcoinPrice = biboxService.GetMarket("BTC_" + currency)?.Result?.Last,
-                        EthereumPrice = biboxService.GetMarket("ETH_" + currency)?.Result?.Last,
-                        LitecoinPrice = biboxService.GetMarket("LTC_" + currency)?.Result?.Last
+                        BitcoinPrice = biboxService.GetMarket("BTC_" + currency).GetAwaiter().GetResult()?.Result?.Last,
+                        EthereumPrice = biboxService.GetMarket("ETH_" + currency).GetAwaiter().GetResult()?.Result?.Last,
+                        LitecoinPrice = biboxService.GetMarket("LTC_" + currency).GetAwaiter().GetResult()?.Result?.Last
                     },
                     new ExchangeDetails()
                     {
                         Name = "Huobi",
-                        BitcoinPrice = huobiService.GetMarket("BTC" + currency)?.Tick?.Close.ToString(),
-                        EthereumPrice = huobiService.GetMarket("ETH" + currency)?.Tick?.Close.ToString(),
-                        LitecoinPrice = huobiService.GetMarket("LTC" + currency)?.Tick?.Close.ToString()
+                        BitcoinPrice = huobiService.GetMarket("BTC" + currency).GetAwaiter().GetResult()?.Tick?.Close.ToString(),
+                        EthereumPrice = huobiService.GetMarket("ETH" + currency).GetAwaiter().GetResult()?.Tick?.Close.ToString(),
+                        LitecoinPrice = huobiService.GetMarket("LTC" + currency).GetAwaiter().GetResult()?.Tick?.Close.ToString()
                     }
                 }
             };

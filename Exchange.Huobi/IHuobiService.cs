@@ -1,9 +1,10 @@
 ﻿using Exchange.Huobi.Models;
+using System.Threading.Tasks;
 
 namespace Exchange.Huobi
 {
     public interface IHuobiService
     {
-        MarketResponse GetMarket(string id);
+        Task<MarketResponse> GetMarket(string id);
     }
 }

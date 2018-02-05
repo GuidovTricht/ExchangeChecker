@@ -1,5 +1,6 @@
 ﻿using Exchange.Coinbase.Models;
 using RestSharp;
+using System.Threading.Tasks;
 
 namespace Exchange.Coinbase
 {
@@ -12,12 +13,12 @@ namespace Exchange.Coinbase
             _restClient = new RestClient("https://api.coinbase.com/v2/"); //https://api.coinbase.com/v2/exchange-rates?currency=BTC
         }
 
-        public TickersResult GetTickers(string currency)
+        public async Task<TickersResult> GetTickers(string currency)
         {
             var request = new RestRequest(Constants.RequestUriTickers, Method.GET);
             request.AddUrlSegment("currency", currency);
 
-            var response = _restClient.Execute<TickersResult>(request);
+            var response = await _restClient.ExecuteTaskAsync<TickersResult>(request);
             if (response != null && response.IsSuccessful)
             {
                 return response.Data;

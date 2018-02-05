@@ -1,10 +1,11 @@
 ﻿using Exchange.Exmo.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Exchange.Exmo
 {
     public interface IExmoService
     {
-        Dictionary<string, Ticker> GetTickers();
+        Task<Dictionary<string, Ticker>> GetTickers();
     }
 }

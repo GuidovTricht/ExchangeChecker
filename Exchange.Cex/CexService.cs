@@ -1,5 +1,6 @@
 ﻿using Exchange.Cex.Models;
 using RestSharp;
+using System.Threading.Tasks;
 
 namespace Exchange.Cex
 {
@@ -12,13 +13,13 @@ namespace Exchange.Cex
             _restClient = new RestClient("https://cex.io/api/"); //https://cex.io/api/tickers/BTC/EUR
         }
 
-        public Ticker GetTicker(string firstCurrency, string secondCurrency)
+        public async Task<Ticker> GetTicker(string firstCurrency, string secondCurrency)
         {
             var request = new RestRequest(Constants.RequestUriTicker, Method.GET);
             request.AddUrlSegment("firstCurrency", firstCurrency);
             request.AddUrlSegment("secondCurrency", secondCurrency);
 
-            var response = _restClient.Execute<Ticker>(request);
+            var response = await _restClient.ExecuteTaskAsync<Ticker>(request);
             if (response != null && response.IsSuccessful)
             {
                 return response.Data;
@@ -27,13 +28,13 @@ namespace Exchange.Cex
             return null;
         }
 
-        public Tickers GetTickers(string firstCurrency = "BTC", string secondCurrency = "EUR")
+        public async Task<Tickers> GetTickers(string firstCurrency = "BTC", string secondCurrency = "EUR")
         {
             var request = new RestRequest(Constants.RequestUriTickers, Method.GET);
             request.AddUrlSegment("firstCurrency", firstCurrency);
             request.AddUrlSegment("secondCurrency", secondCurrency);
 
-            var response = _restClient.Execute<Tickers>(request);
+            var response = await _restClient.ExecuteTaskAsync<Tickers>(request);
             if (response != null && response.IsSuccessful)
             {
                 return response.Data;

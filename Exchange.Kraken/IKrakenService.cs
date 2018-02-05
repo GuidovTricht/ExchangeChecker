@@ -1,9 +1,10 @@
 ﻿using Exchange.Kraken.Models;
+using System.Threading.Tasks;
 
 namespace Exchange.Kraken
 {
     public interface IKrakenService
     {
-        TickerDetails GetTicker(string pair);
+        Task<TickerDetails> GetTicker(string pair);
     }
 }

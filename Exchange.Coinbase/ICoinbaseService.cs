@@ -1,9 +1,10 @@
 ﻿using Exchange.Coinbase.Models;
+using System.Threading.Tasks;
 
 namespace Exchange.Coinbase
 {
     public interface ICoinbaseService
     {
-        TickersResult GetTickers(string currency);
+        Task<TickersResult> GetTickers(string currency);
     }
 }

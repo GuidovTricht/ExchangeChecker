@@ -1,10 +1,11 @@
 ﻿using Exchange.Bibox.Models;
+using System.Threading.Tasks;
 
 namespace Exchange.Bibox
 {
     public interface IBiboxService
     {
-        MarketsResponse GetAllMarkets();
-        MarketResponse GetMarket(string id);
+        Task<MarketsResponse> GetAllMarkets();
+        Task<MarketResponse> GetMarket(string id);
     }
 }

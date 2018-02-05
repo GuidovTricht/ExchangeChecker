@@ -1,9 +1,10 @@
 ﻿using Exchange.Bitstamp.Models;
+using System.Threading.Tasks;
 
 namespace Exchange.Bitstamp
 {
     public interface IBitstampService
     {
-        Ticker GetTicker(string id);
+        Task<Ticker> GetTicker(string id);
     }
 }
